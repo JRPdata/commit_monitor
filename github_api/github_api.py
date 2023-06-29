@@ -23,7 +23,7 @@ def fetch_commits(repo_url, repo_id):
         commits = response.json()
         return commits
     else:
-        raise Exception(f"Failed to fetch commits. Status code: {response.status_code}")
+        raise Exception(f"Failed to fetch commits. Status code: {response.status_code}. API_URL: {api_url}")
 
 
 def load_github_token():
@@ -48,10 +48,12 @@ def get_commit_list(repo_url, repo_id):
 
 
 def fetch_commit(repo_url, commit_sha):
-    api_url = f"{repo_url}/commits/{commit_sha}"
+    owner, project = extract_owner_project(repo_url)
+    api_url = f"https://api.github.com/repos/{owner}/{project}/commits/{commit_sha}"
+    token = load_github_token()
     headers = {
         "Accept": "application/vnd.github+json",
-        "Authorization": f"Bearer {load_github_token()}",
+        "Authorization": f"Bearer {token}",
         "X-GitHub-Api-Version": "2022-11-28"
     }
 

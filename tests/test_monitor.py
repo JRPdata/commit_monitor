@@ -45,7 +45,7 @@ class MonitorRepositoriesTestCase(unittest.TestCase):
         mock_check_for_update.assert_called_once()
         mock_get_complete_file_list.assert_called_once()
         mock_filter_files.assert_called_once()
-        mock_create_notification_message.assert_called_once_with(repo_id, 'README.md')
+        mock_create_notification_message.assert_called_once_with('README.md')
         mock_send_notification.assert_called_once_with(repo_id, ntfy_url, 'README.md')
 
 if __name__ == '__main__':

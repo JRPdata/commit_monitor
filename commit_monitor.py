@@ -6,7 +6,7 @@ def read_poll_interval():
     with open('conf/poll_interval_min', 'r') as file:
         interval = file.read().strip()
     interval = int(interval)
-    if interval = None or interval < 1:
+    if interval == None or interval < 1:
         interval = 5
     return interval
 

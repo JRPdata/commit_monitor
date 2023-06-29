@@ -24,20 +24,3 @@ def save_last_updated(repo_id, updated_time):
     history_file = os.path.join(HISTORY_DIRECTORY, f"{repo_id}_last_updated.json")
     with open(history_file, "w") as file:
         json.dump(history_data, file)
-
-def load_commits(repo_id):
-    # Load the commit history for the given repo_id
-    history_file = os.path.join(HISTORY_DIRECTORY, f"{repo_id}_commits.json")
-    if os.path.exists(history_file):
-        with open(history_file, "r") as file:
-            history_data = json.load(file)
-            return history_data.get("commits", [])
-    else:
-        return []
-
-def save_commits(repo_id, commits):
-    # Save the commit history for the given repo_id
-    history_data = {"commits": commits}
-    history_file = os.path.join(HISTORY_DIRECTORY, f"{repo_id}_commits.json")
-    with open(history_file, "w") as file:
-        json.dump(history_data, file)

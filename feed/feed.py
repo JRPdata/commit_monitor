@@ -23,10 +23,10 @@ def check_for_update(repo_id, repo_url, last_updated):
     latest_update = get_latest_update(feed)
 
     if latest_update:
-        last_updated_time = datetime.strptime(last_updated, "%Y-%m-%dT%H:%M:%SZ")
         latest_update_time = datetime.strptime(latest_update, "%Y-%m-%dT%H:%M:%SZ")
         # Compare last_updated with stored last_updated for repo_id
         if last_updated is not None:
+            last_updated_time = datetime.strptime(last_updated, "%Y-%m-%dT%H:%M:%SZ")
             if latest_update > last_updated:
                 return latest_update  # Return the new (updated) timestamp
             else:

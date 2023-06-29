@@ -28,5 +28,5 @@ Additionally, you can modify the `repos/test.conf` file as an example to specify
 1. Install the required dependencies by running: `pip install -r requirements.txt`.
 2. Modify the configuration files for this project (see above).
 3. Start the Ntfy server.
-4. Run the Commit File Monitor: `python commit_monitor.py`.
-5. Subscribe on your phone to your ntfy server, where the topic will be the name of the repo file in conf/repos/. For example, if your ntfy_url is `http://192.168.1.101` and your repo conf is named `leela-zero.conf`, the url will for the subscription is 'http://192.168.1.101/leela-zero'
+4. Run the Commit File Monitor: `python3 commit_monitor.py`.
+5. Subscribe on your phone to your ntfy server, where the topic will be the name of the repo file in conf/repos/. For example, if your ntfy_url is `http://192.168.1.101` and your repo conf is named `leela-zero.conf`, the url will be for the subscription is `http://192.168.1.101/leela-zero`. You can also change the default server in the app to match yours and make it easier to only enter the topic `leela-zero`.

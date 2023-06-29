@@ -20,16 +20,16 @@ def monitor_repositories():
         if new_last_updated:
             # Update detected, fetch complete file list
             complete_file_list = github_api.get_complete_file_list(repo_url, repo_id)
-
             # Filter files
             filtered_files = filter.filter_files(complete_file_list, config_data['filters'])
 
-            # Create notification message
-            message = notify.create_notification_message(repo_id, filtered_files)
+            if filtered_files is not None and filtered_files != []:
+                # Create notification message
+                message = notify.create_notification_message(filtered_files)
 
-            # Send notification
-            ntfy_url = config.load_notify()
-            notify.send_notification(repo_id, ntfy_url, message)
+                # Send notification
+                ntfy_url = config.load_notify()
+                notify.send_notification(repo_id, ntfy_url, message)
 
             # Update last_updated timestamp in history
             history.save_last_updated(repo_id, new_last_updated)
