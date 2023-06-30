@@ -8,13 +8,11 @@ def fetch_commits(repo_url, repo_id):
     owner, project = extract_owner_project(repo_url)
     api_url = f"https://api.github.com/repos/{owner}/{project}/commits"
     token = load_github_token()
-    last_updated = load_last_updated(repo_id)
 
     headers = {
         "Accept": "application/vnd.github+json",
         "Authorization": f"Bearer {token}",
-        "X-GitHub-Api-Version": "2022-11-28",
-        "Since": last_updated
+        "X-GitHub-Api-Version": "2022-11-28"
     }
 
     response = requests.get(api_url, headers=headers)
@@ -43,7 +41,9 @@ def extract_owner_project(repo_url):
 
 def get_commit_list(repo_url, repo_id):
     commits = fetch_commits(repo_url, repo_id)
-    commit_list = [commit['sha'] for commit in commits]
+    last_updated = load_last_updated(repo_id)
+    # filter dates later then last_updated (Github REST API doesn't have a parameter to list commits since a timestamp)
+    commit_list = [commit['sha'] for commit in commits if last_updated is None or commit['commit']['author']['date'] > last_updated]
     return commit_list
 
 
